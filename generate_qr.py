@@ -1,8 +1,11 @@
 import qrcode
+import os
+
+
+
 
 # The text you want to encode into the QR code
-text = "You are a museum guide for the carnegie museum of art. The painting in question is Water Lilies by Claude Monet. \
-        Help me answer some questions about the painting and it's artist"
+text = "Bathers with Crab - Pierre-Auguste Renoir.jpg"
 
 # Generate the QR code
 qr = qrcode.QRCode(

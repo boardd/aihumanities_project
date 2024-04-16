@@ -60,17 +60,17 @@ export default function Header() {
   return (
     <header className="Header">
         <div>
-            <img src={require("../images/ai-icon.png")} className="Logo" alt="logo" />
-            <span className="Project-Name"> &nbsp; for Humanities</span>
+          <a href="/"><img src={require("../images/ai-icon.png")} className="Logo" alt="logo" /></a>
+          <a href="/"><span className="Project-Name"> &nbsp; for Humanities</span></a>
         </div>
         <nav className="Nav">
-          <a href="/">Home</a>
           <a href="/scan">Scan</a>
           <a href="/upload">Upload</a>
+          <a href="/team">Team</a>
         </nav>
-      <button onClick={toggleNav} className="Burger">
+      {/* <button onClick={toggleNav} className="Burger">
         🍔
-      </button>
+      </button> */}
     </header>
   );
 }

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { QrReader } from 'react-qr-reader';
+import '../styling/QRCodeScanner.css';
 
-export default function QRReader() {
+const QRCodeScanner = () => {
+
     const [qrCode, setQRCode] = useState('');
 
     const handleScan = data => {
@@ -15,18 +17,16 @@ export default function QRReader() {
     }
 
     return (
-        <div>
-            <h1>QR Code Reader</h1>
+        <div className='scanner-container'>
             <QrReader
-                delay={300}
-                onError={handleError}
-                onScan={handleScan}
-                style={{ width: '100%' }}
+            delay={300}
+            onError={handleError}
+            onScan={handleScan}
+            className='scanner'
             />
-            <div style={{ marginTop: '20px' }}>
-                <h2>Scanned QR Code:</h2>
-                <p>{qrCode}</p>
-            </div>
+            <p>Scanned QR Code: {qrCode}</p>
         </div>
     )
 }
+
+export default QRCodeScanner;

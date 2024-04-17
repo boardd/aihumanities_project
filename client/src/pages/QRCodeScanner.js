@@ -65,32 +65,6 @@ const QRCodeScanner = () => {
         });
     };
 
-    // const uploadImages = () => {
-    //     console.log(scannedImages.map((imageUrl, index) => ({'images': imageUrl})))
-    //     fetch('http://127.0.0.1:5000/qrimage_upload', {
-    //         method: 'POST',
-    //         headers: {
-    //         'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //         images: scannedImages.map((imageUrl, index) => ({'images': imageUrl})),
-    //         }),
-    //     })
-    //     .then(response => {
-    //         console.log(JSON.stringify({
-    //             images: scannedImages.map((imageUrl, index) => ({'images': imageUrl}))}))
-    //         if (!response.ok) {
-    //         console.log(response);
-    //         throw new Error('Failed to upload images :(');
-    //         }
-    //         console.log(response)
-    //         console.log('Uploaded images successfully :)');
-    //     })
-    //     .catch(error => {
-    //         console.error('Error uploading images: ', error);
-    //     });
-    // };
-
     return (
         <div>
             <Header />

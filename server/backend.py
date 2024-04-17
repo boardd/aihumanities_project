@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger('HELLO WORLD')
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
+UPLOAD_FOLDER = './uploaded_images/'
 
 app = Flask(__name__)
 CORS(app)
@@ -17,18 +17,23 @@ CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/qrimage_upload", methods=['POST'])
-def QRImage_upload():
-    target=os.path.join(UPLOAD_FOLDER,'test_docs')
-    if not os.path.isdir(target):
-        os.mkdir(target)
-    logger.info("welcome to upload`")
-    file = request.files['file'] 
-    filename = secure_filename(file.filename)
-    destination="/".join([target, filename])
-    file.save(destination)
-    session['uploadFilePath']=destination
-    response="File successfully uploaded!"
-    return response
+def qrimage_uploadmage_upload():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    files = request.files.getlist('file')
+    filenames = []
+
+    for file in files:
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+
+        if file:
+            filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(filename)
+            filenames.append(filename)
+
+    return jsonify({'success': True, 'filenames': filenames}), 200
 
 @app.route("/")
 def home():

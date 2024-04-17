@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-// import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import '../styling/QRCodeScanner.css';
 import Header from '../components/Header';
@@ -71,24 +70,21 @@ const QRCodeScanner = () => {
             <h1>QR Code Scanner</h1>
             <div id="reader" width="300px"></div>
                 {errorMessage && <p>Please try scanning or uploading again.</p>}
-                {scannedImages && <div>
-                    {/* <p>Scanned Images:</p>
-                    <div className="scanned-images">
-                        {scannedImages.map((imageUrl, index) => (
-                            <img key={index} src={require("../paintings/"+imageUrl)} alt={`Scanned QR Code ${index + 1}`} />
-                        ))}
-                    </div> */}
-                    <p>Scanned Images List: {scannedImages}</p>
-                </div>}
-                {/* {scannedImage && (
-                    <div>
-                        <p>Scanned Image:</p>
-                        <img src={require("../paintings/"+scannedImage)} alt="Scanned QR Code" />
+                {scannedImages && <div style={{ display: 'flex', justifyContent: 'center'}}>
+                    <div style={{ textAlign: 'center' }}>
+                        <h4>Here's a list of paintings you've uploaded so far:</h4>
+                        <ul style={{ listStyleType: 'none', padding: 0 }}>
+                            {scannedImages.map((imageUrl, index) => (
+                                <li key={index}>{imageUrl}</li>
+                            ))}
+                        </ul>
                     </div>
-                )} */}
-            <button className="finish-button" style={{alignItems: 'center', justifyItems: 'center'}}>
-                <Link to="/generated-image" onClick={uploadImages} style={{ textDecoration: 'none', color: 'inherit', justifyItems: 'center'}}>I'm finished scanning</Link>
-            </button>
+                </div>}
+            <center>
+                <button className="finish-button" style={{alignItems: 'center', justifyItems: 'center'}}>
+                    <Link to="/generated-image" onClick={uploadImages} style={{ textDecoration: 'none', color: 'inherit', justifyItems: 'center'}}>I'm finished scanning</Link>
+                </button>
+            </center>
         </div>
     )
 }

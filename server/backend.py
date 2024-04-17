@@ -34,6 +34,10 @@ def upload_images():
 
     return jsonify({'success': True, 'image_urls': image_urls}), 200
 
+@app.route("/generated-image")
+def generate_image():
+    return
+
 @app.route("/")
 def home():
     return "Hello, World!"

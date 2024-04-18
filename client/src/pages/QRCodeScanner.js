@@ -67,7 +67,11 @@ const QRCodeScanner = () => {
     return (
         <div>
             <Header />
-            <h1>QR Code Scanner</h1>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <p>Instructions: Scan the QR codes by clicking 'Request Camera Permissions' and allowing permissions. Or, upload the QR code images by clicking 'Scan an Image File' and selecting files from your device.</p>
             <div id="reader" width="300px"></div>
                 {errorMessage && <p>Please try scanning or uploading again.</p>}
                 {scannedImages && <div style={{ display: 'flex', justifyContent: 'center'}}>

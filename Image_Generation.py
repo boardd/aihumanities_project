@@ -67,9 +67,7 @@ def filter_and_combine_descriptions(art_dict, selected_filenames):
     str: A combined description of selected artworks.
     """
     selected_descriptions = [art_dict[filename] for filename in selected_filenames if filename in art_dict]
-    print(selected_descriptions)
     combined_description = " ".join(selected_descriptions)
-    print(combined_description)
     return combined_description
 
 def generate_image_with_dalle(description):

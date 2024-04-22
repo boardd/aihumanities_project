@@ -8,7 +8,7 @@ load_dotenv()
 
 # Assuming your OpenAI API key is stored in an environment variable
 
-API_KEY = os.getenv('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')
+API_KEY = 'sk-proj-y0mMgfKawVlcvZU6hQRuT3BlbkFJwh4ArO5QmUJgRsOzUwV4'
 openai.api_key = API_KEY
  
 
@@ -80,13 +80,14 @@ def generate_image_with_dalle(description):
     Returns:
     str: URL of the generated image.
     """
-    response = openai.ImageGeneration.create(
+    response = openai.Image.create(
         model="dall-e-2",  # Ensure you are using the correct model
         prompt=description,
         n=1,
         size="1024x1024"
     )
     image_url = response['data'][0]['url']
+    print("success")
     return image_url
 
 # Example usage

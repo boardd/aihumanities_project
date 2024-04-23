@@ -1,7 +1,7 @@
 # backend.py
 from flask import Flask, jsonify, flash, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
-# from flask_cors import CORS
+from flask_cors import CORS
 import os
 import logging
 
@@ -23,7 +23,7 @@ UPLOAD_FOLDER = './uploaded_images/'
 TEXT_FILE = './uploaded_images.txt'
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 

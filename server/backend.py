@@ -25,7 +25,12 @@ UPLOAD_FOLDER = './uploaded_images/'
 TEXT_FILE = './uploaded_images.txt'
 
 app = Flask(__name__)
-CORS(app, origins="https://mygalleryguide.onrender.com")
+CORS(app, origins="https://mygalleryguide.onrender.com", supports_credentials=True)
+
+
+# Apply CORS to all routes or specific routes
+CORS(app)
+
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 

@@ -1,5 +1,4 @@
 .DS_Store
 node_modules
 process.env
-venv
 __pycache__

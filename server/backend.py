@@ -25,7 +25,7 @@ UPLOAD_FOLDER = './uploaded_images/'
 TEXT_FILE = './uploaded_images.txt'
 
 app = Flask(__name__)
-CORS(app, origins="https://mygalleryguide.onrender.com", supports_credentials=True)
+CORS(app, origins="*", supports_credentials=True)
 
 
 # Apply CORS to all routes or specific routes
@@ -38,7 +38,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def upload_images():
     data = request.json
     if not data or 'images' not in data:
-        return jsonify({'error': 'Invalid data format'}), 400
+        response = jsonify({'error': 'Invalid data format'})
+
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
+
+        return response, 400
+        # return jsonify({'error': 'Invalid data format'}), 400
 
     image_urls = data['images']
 
@@ -47,9 +54,23 @@ def upload_images():
             for url in image_urls:
                 file.write(f"{url}\n")
     except Exception as e:
-        return jsonify({'error': f"Error writing to file: {e}"}), 500
+        response = jsonify({'error': f"Error writing to file: {e}"})
 
-    return jsonify({'success': True, 'image_urls': image_urls}), 200
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
+
+        return response, 500
+        # return jsonify({'error': f"Error writing to file: {e}"}), 500
+
+    response = jsonify({'success': True, 'image_urls': image_urls})
+
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
+
+    return response, 200
+    # return jsonify({'success': True, 'image_urls': image_urls}), 200
 
 art_dict = {
     'Young Women Picking Fruit - Mary Cassatt.jpeg': 'Depicts two young women, one standing and reaching for fruit on a tree, the other seated and looking up, both dressed in flowing garments amidst a verdant setting.',
@@ -138,8 +159,23 @@ def generate_image():
     if description:
         generated_image_url = generate_image_with_dalle(description)
         if generated_image_url:
-            return jsonify({"image_url": generated_image_url}), 200
-    return jsonify({"error": "Failed to generate image"}), 500
+            response = jsonify({"image_url": generated_image_url})
+
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+            response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
+
+            return response, 200
+            # return jsonify({"image_url": generated_image_url}), 200
+
+    response = jsonify({"error": "Failed to generate image"})
+
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
+
+    return response, 500
+    # return jsonify({"error": "Failed to generate image"}), 500
 
 @app.route("/")
 def home():

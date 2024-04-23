@@ -1,4 +1,3 @@
-
 import openai
 from dotenv import load_dotenv
 import os
@@ -8,10 +7,9 @@ load_dotenv()
 
 # Assuming your OpenAI API key is stored in an environment variable
 
-API_KEY = 'sk-proj-y0mMgfKawVlcvZU6hQRuT3BlbkFJwh4ArO5QmUJgRsOzUwV4'
+API_KEY = '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'
 openai.api_key = API_KEY
  
-
 
 art_dict = {
     'Young Women Picking Fruit - Mary Cassatt.jpeg': 'Depicts two young women, one standing and reaching for fruit on a tree, the other seated and looking up, both dressed in flowing garments amidst a verdant setting.',
@@ -19,11 +17,11 @@ art_dict = {
     'Water Lilies (Nympheas) - Claude Monet.jpg': 'A dreamy, impressionistic expanse of water lilies floating on a pond, with reflections and a play of light and shadow, typical of Monet water lily series.',
     'View of Saint-Mammès - Alfred Sisley.jpeg': 'A serene depiction of the confluence of rivers at Saint-Mammès, with calm water, boats, and buildings reflected in Sisley light-infused palette.',
     'The Sea at Le Havre - Claude Monet.jpeg': 'A vibrant seascape with the waves in the foreground, a sailing boat in the mid-distance, and the hint of a shoreline under a sky heavy with clouds.',
-    'The Red Turban - Hermann M. Pechstein.jpeg': "A portrait of a nude woman wearing a red turban, beside a fruit bowl, with expressive colors and strong outlines, characteristic of Pechstein's style.",
+    'The Red Turban - Hermann M. Pechstein.jpeg': "A portrait of a woman wearing a red turban, beside a fruit bowl, with expressive colors and strong outlines, characteristic of Pechstein's style.",
     'The Port of Trouville (Le Port de Trouville) - Eugene Louis Boudin.jpg': 'A bustling harbor scene with ships, people, and buildings, executed with Boudin characteristic light touch and interest in everyday life.',
     'The Great Bridge, Rouen (Le Grand Pont, Rouen) - Camille Pissarro.jpg': "A cityscape showing the grandeur of Rouen bridge and architecture, with figures and activity on the riverbank, in Pissarro's delicate impressionist style.",
     "The Garden in the Rue Cortot, Montmartre - Pierre-Auguste Renoir.jpg": "Vibrant garden with colorful flowers in the foreground and figures conversing in the background.",
-    "The Full-Length Mirror - Pierre Bonnard.jpg": "Intimate moment of a nude woman standing before a full-length mirror in a domestic interior with a colorful rug and striped chair.",
+    "The Full-Length Mirror - Pierre Bonnard.jpg": "Intimate moment of a woman standing before a full-length mirror in a domestic interior with a colorful rug and striped chair.",
     "The Bath (Le bain) - Edgar Degas.jpg": "Quiet scene of a woman bathing, sitting at the edge of a bathtub in a room with vibrant orange and blue hues.",
     "Street in Pontoise (Rue de Beaujour, Pontoise) - Camille Pissarro.jpg": "A street scene with a figure walking down a tree-lined street, houses on one side and a stone wall on the other, under a sky with clouds.",
     "Self-Portrait - Paul Cézanne.jpeg": "Paul Cézanne's self-portrait with a solid expression against a cool-toned turquoise background.",
@@ -31,7 +29,7 @@ art_dict = {
     "River in Winter - John Henry Twachtman.jpg": "Serene winter scene with a river cutting through a snow-covered landscape leading to distant structures.",
     "Place des Lices, St. Tropez - Paul Signac.jpeg": "Bright, sunlit scene with vivid colors depicting the town square of St. Tropez with pointillist technique.",
     "Odalique Coiffure Verte (Odalisque with Green Headress) - Henri Matisse.jpg": "A female figure seated with a green headress, featuring flat areas of color and loose brushwork, characteristic of Matisse's vibrant, decorative style.",
-    "Nude in Bathtub - Pierre Bonnard.jpeg": "A vividly colored, intimate scene of a nude figure in a bathtub, with loose, expressive brushstrokes creating a mosaic of color.",
+    "Nude in Bathtub - Pierre Bonnard.jpeg": "A vividly colored, intimate scene of a figure in a bathtub, with loose, expressive brushstrokes creating a mosaic of color.",
     "Le Moulin de la Galette - Vincent van Gogh.jpeg": "A landscape showing a windmill amidst buildings with a vibrant green field, using Van Gogh's signature swirling brushstrokes and bright colors.",
     "Landscape with Three Figures - Paul Gauguin.jpg": "A tropical landscape with bold colors and strong outlines, featuring three figures in a paradise setting, with a flat color application and dreamlike quality.",
     "Landscape Near Aix, The Plain of the Arc River - Paul Cézanne.jpeg": "A view over a river valley, with structured brushwork and a muted palette that creates depth and solidity in the natural scene.",
@@ -44,16 +42,18 @@ art_dict = {
     'By the River - Edward W. Redfield.jpg': 'An impressionist landscape showing a frozen river with surrounding trees and vegetation, bathed in the soft light of winter.',
     'Birches - Paula Modersohn-Becker.jpg': 'A painting featuring a group of birch trees against a darkening sky, using expressive brushstrokes and earthy colors to evoke a sense of solitude.',
     'Beach at Trouville (La Plage de Trouville) - Eugène Louis Boudin.jpeg': 'A 19th-century beach scene with elegantly dressed figures under parasols by the seaside, showcasing a typical leisure scene of the time.',
-    'Bathers with Crab - Pierre-Auguste Renoir.jpg': 'An impressionistic painting of nude female bathers in a luminous landscape, with one figure reaching for a crab, rendered in Renoir\'s characteristic soft and dappled light.'
+    'Bathers with Crab - Pierre-Auguste Renoir.jpg': 'An impressionistic painting of female bathers in a luminous landscape, with one figure reaching for a crab, rendered in Renoir\'s characteristic soft and dappled light.'
 }
-'''
-selected_filenames = [] ##Should contain all the selected file names
-'''
-selected_filenames = [
-    'Young Women Picking Fruit - Mary Cassatt.jpeg',
-    'The Sea at Le Havre - Claude Monet.jpeg',
-    'The Red Turban - Hermann M. Pechstein.jpeg'
-]
+
+
+file_path = 'server/image_urls.txt'
+
+# Open the file and read lines into a list
+with open(file_path, 'r') as file:
+    lines = [line.strip() for line in file]
+
+
+selected_filenames = lines
 
 def filter_and_combine_descriptions(art_dict, selected_filenames):
     """
@@ -68,8 +68,9 @@ def filter_and_combine_descriptions(art_dict, selected_filenames):
     """
     selected_descriptions = [art_dict[filename] for filename in selected_filenames if filename in art_dict]
     combined_description = " ".join(selected_descriptions)
+    combined_description = "You are a painter looking to combine the following elements into one cohesive painting" + combined_description
     return combined_description
-
+''''''
 def generate_image_with_dalle(description):
     """
     Use DALL-E to generate an image based on the description.

@@ -28,10 +28,6 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 
-# Apply CORS to all routes or specific routes
-CORS(app)
-
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/qrimage_upload", methods=['POST'])

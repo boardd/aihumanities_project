@@ -7,7 +7,9 @@ import logging
 
 from openai import OpenAI
 
-API_KEY = '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'
+with open('./api_key.txt', 'r') as file:
+    API_KEY = file.readline().strip()
+
 client = OpenAI(api_key=API_KEY)
 from dotenv import load_dotenv
 import os

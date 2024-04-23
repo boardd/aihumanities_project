@@ -1,0 +1,13 @@
+services:
+  - name: frontend
+    buildCommand: 
+      - cd client
+      - npm install --legacy-peer-deps
+      - npm start
+    startCommand: echo "No start command needed for frontend"
+
+  - name: backend
+    buildCommand: 
+      - cd server
+      - pip install -r requirements.txt
+    startCommand: gunicorn backend:app

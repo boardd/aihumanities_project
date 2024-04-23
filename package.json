@@ -6,7 +6,7 @@
   "description": "",
   "main": "readQR.js",
   "scripts": {
-    "start": "cd server && venv/bin/flask run --no-debugger",
+    "start": "cd server && python3 backend.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

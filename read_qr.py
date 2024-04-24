@@ -13,7 +13,7 @@ def list_files_in_directory(directory_path):
     # List files in the directory
     file_names = os.listdir(directory_path)
     
-    return file_names\
+    return file_names
 
 def clear_files_in_directory(directory_path):
     """

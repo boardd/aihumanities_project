@@ -5,6 +5,10 @@
 ```bash
 pip install qrcode
 pip install opencv
+pip install flask
+pip install flask-cors
+pip install openai
+pip install dotenv
 ```
 
 ## How to run:
